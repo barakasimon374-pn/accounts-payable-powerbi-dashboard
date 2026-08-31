@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "0365a219de3d3750f8df",
+  "position": {
+    "x": 951.42857142857167,
+    "y": 257.28586521771945,
+    "z": 5000,
+    "height": 105.48335974643423,
+    "width": 218.06656101426307,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AP_Data"
+                    }
+                  },
+                  "Property": "Average Days to Pay"
+                }
+              },
+              "queryRef": "AP_Data.Average Days to Pay",
+              "nativeQueryRef": "Average Days to Pay"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "AP_Data"
+                  }
+                },
+                "Property": "Average Days to Pay"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8f0cf84f9cba77f3d71f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AP_Data"
+              }
+            },
+            "Property": "Average Days to Pay"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-KE
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["AP_Data","Aging Sort"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table AP_Data
+ref table DateTableTemplate_baaec1bd-2222-442e-a1c5-da0c96f3fc0e
+ref table LocalDateTable_ed870d7e-f15a-4208-9601-592564b2840a
+ref table LocalDateTable_72550c0e-15d7-4ae5-8fa9-d0c066d2780a
+ref table LocalDateTable_35e21733-8dec-4525-89a6-adc006929d3a
+ref table DateTable
+ref table LocalDateTable_7df1b84f-be2f-4893-aee9-281a823d0ec5
+ref table 'Aging Sort'
+
+ref cultureInfo en-US
+

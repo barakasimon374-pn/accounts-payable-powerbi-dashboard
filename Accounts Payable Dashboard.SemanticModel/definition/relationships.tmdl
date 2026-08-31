@@ -1,0 +1,24 @@
+relationship 26bcbddb-97b5-4c19-a368-3b86ff6e1fd9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AP_Data.'Due Date'
+	toColumn: LocalDateTable_ed870d7e-f15a-4208-9601-592564b2840a.Date
+
+relationship 2fc876b8-0d7e-4b51-b4d8-532242272332
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AP_Data.'Payment Date'
+	toColumn: LocalDateTable_72550c0e-15d7-4ae5-8fa9-d0c066d2780a.Date
+
+relationship 75096c0d-a595-49bd-ad00-24e777d35f14
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AP_Data.'Invoice Month'
+	toColumn: LocalDateTable_35e21733-8dec-4525-89a6-adc006929d3a.Date
+
+relationship f2fba656-97c2-4103-8dab-bc9c9e299808
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DateTable.Date
+	toColumn: LocalDateTable_7df1b84f-be2f-4893-aee9-281a823d0ec5.Date
+
+relationship 1b49a33b-0bb6-b8ee-8550-c69a67c7708e
+	fromColumn: AP_Data.'Invoice Date'
+	toColumn: DateTable.Date
+

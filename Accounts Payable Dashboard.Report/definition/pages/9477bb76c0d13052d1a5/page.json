@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "9477bb76c0d13052d1a5",
+  "displayName": "Executive Overview",
+  "displayOption": "FitToPage",
+  "height": 1000,
+  "width": 1500,
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "247L"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

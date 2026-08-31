@@ -1,0 +1,299 @@
+table AP_Data
+	lineageTag: 82cfffd9-5d69-4936-b084-fccad5f32fc5
+
+	measure 'Total Invoice Amount' =
+			
+			SUM(AP_Data[Invoice Amount])
+		lineageTag: 0544c200-6440-41d2-bfdd-7ab835a57207
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Paid Amount' =
+			
+			SUM(AP_Data[Paid Amount])
+		lineageTag: 03f42e1d-4dba-4696-8ffd-3325552f565c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Outstanding' =
+			
+			SUM(AP_Data[Outstanding Amount])
+		lineageTag: 4c8b5487-42b5-4478-b752-8b349068ab7a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Overdue' =
+			
+			CALCULATE(
+			    [Total Outstanding],
+			    AP_Data[Aging Bucket] <> "Paid",
+			    AP_Data[Days Overdue] > 0
+			)
+		lineageTag: e91d62b9-dafa-4fc1-b8a7-6eed76b78708
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Invoice Count' =
+			
+			DISTINCTCOUNT(AP_Data[Invoice ID])
+		formatString: 0
+		lineageTag: c721ee17-707d-49ef-8733-f4f4aa9ff1c7
+
+	measure 'Overdue Invoice Count' =
+			
+			CALCULATE(
+			    [Total Invoice Count],
+			    AP_Data[Days Overdue] > 0,
+			    AP_Data[Outstanding Amount] > 0
+			)
+		formatString: 0
+		lineageTag: cb4f7f2c-3397-4949-8aaf-01288e10cfcf
+
+	measure 'Average Days to Pay' =
+			
+			AVERAGEX(
+			    FILTER(
+			        AP_Data,
+			        NOT ISBLANK(AP_Data[Payment Date])
+			    ),
+			    AP_Data[Days to Pay]
+			)
+		lineageTag: 248e8033-242b-45fb-9ab6-7e3d5f48cdb6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'On-Time Payment %' =
+			
+			DIVIDE(
+			    CALCULATE(
+			        [Total Invoice Count],
+			        AP_Data[On Time Payment] = "Yes"
+			    ),
+			    CALCULATE(
+			        [Total Invoice Count],
+			        AP_Data[On Time Payment] <> "N/A"
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: cd4c2083-b80c-4f22-99fa-a30da35bf2f2
+
+	measure 'Total Invoice Count' =
+			
+			DISTINCTCOUNT(AP_Data[Invoice ID])
+		formatString: 0
+		lineageTag: 87afc205-ac70-4114-84d7-aa963da8ce36
+
+	column 'Invoice ID'
+		dataType: string
+		lineageTag: 8f5b73a0-3150-4dc9-bbee-80338ac547a9
+		summarizeBy: none
+		sourceColumn: Invoice ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a835215c-f065-4b4e-a8d1-691fb07bef4e
+		summarizeBy: none
+		sourceColumn: Invoice Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Due Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 647da909-f9e5-4be8-995f-6afac55e4e2c
+		summarizeBy: none
+		sourceColumn: Due Date
+
+		variation Variation
+			isDefault
+			relationship: 26bcbddb-97b5-4c19-a368-3b86ff6e1fd9
+			defaultHierarchy: LocalDateTable_ed870d7e-f15a-4208-9601-592564b2840a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Supplier
+		dataType: string
+		lineageTag: 02576cf0-9ffe-4492-bb5e-512578a2cdec
+		summarizeBy: none
+		sourceColumn: Supplier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: d95a6b9e-fd73-43ac-b1af-5bb558fcb4dc
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 6989bb59-6bea-46ab-a596-c27ff4b15083
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Amount'
+		dataType: double
+		lineageTag: 24baa748-4da4-4360-bc01-c14dc9371026
+		summarizeBy: sum
+		sourceColumn: Invoice Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Payment Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0f536fda-39ec-4e08-b68d-5208f405b208
+		summarizeBy: none
+		sourceColumn: Payment Date
+
+		variation Variation
+			isDefault
+			relationship: 2fc876b8-0d7e-4b51-b4d8-532242272332
+			defaultHierarchy: LocalDateTable_72550c0e-15d7-4ae5-8fa9-d0c066d2780a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Payment Status'
+		dataType: string
+		lineageTag: d2bbbc3a-e873-4175-a209-645c72fcce1a
+		summarizeBy: none
+		sourceColumn: Payment Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Method'
+		dataType: string
+		lineageTag: cfc371a3-80e3-4d51-bd2a-8a5b084cb69a
+		summarizeBy: none
+		sourceColumn: Payment Method
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: 2c632fa1-3317-4529-a1cd-808e7c3e12ba
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paid Amount'
+		dataType: double
+		lineageTag: f103d179-b398-4004-beee-05cf7f983d23
+		summarizeBy: sum
+		sourceColumn: Paid Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Outstanding Amount'
+		dataType: double
+		lineageTag: a450d44a-ceab-428a-adc6-fea9d614acd8
+		summarizeBy: sum
+		sourceColumn: Outstanding Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Days to Pay'
+		dataType: int64
+		formatString: 0
+		lineageTag: 21c871b9-1da8-4781-91e2-b6d5ac122c29
+		summarizeBy: sum
+		sourceColumn: Days to Pay
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Overdue'
+		dataType: int64
+		formatString: 0
+		lineageTag: dd874a78-e1cb-4715-bec3-6aeefb2d0cb8
+		summarizeBy: sum
+		sourceColumn: Days Overdue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Aging Bucket'
+		dataType: string
+		lineageTag: 3754df14-5bb4-4d5d-bfa7-93431a55ad33
+		summarizeBy: none
+		sourceColumn: Aging Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'On Time Payment'
+		dataType: string
+		lineageTag: 9ffa1578-a078-427e-b19e-79152a45a45d
+		summarizeBy: none
+		sourceColumn: On Time Payment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Month'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dd979871-b166-4aaf-8f92-758a192a7382
+		summarizeBy: none
+		sourceColumn: Invoice Month
+
+		variation Variation
+			isDefault
+			relationship: 75096c0d-a595-49bd-ad00-24e777d35f14
+			defaultHierarchy: LocalDateTable_35e21733-8dec-4525-89a6-adc006929d3a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 68230813-f32c-4570-bbe0-cf9104c97f81
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 058b346d-4c28-438f-ad34-1fb1508168ff
+		summarizeBy: none
+		sourceColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AP_Data = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Users\user\OneDrive\Documents\Sim\Power BI Desktop\Custom Connectors\Accounts_Payable_Dashboard_Data.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "AP_Data", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"Invoice ID", type text}, {"Invoice Date", Int64.Type}, {"Due Date", Int64.Type}, {"Supplier", type text}, {"Department", type text}, {"Category", type text}, {"Invoice Amount", Int64.Type}, {"Payment Date", Int64.Type}, {"Payment Status", type text}, {"Payment Method", type text}, {"Currency", type text}, {"Paid Amount", Int64.Type}, {"Outstanding Amount", Int64.Type}, {"Days to Pay", Int64.Type}, {"Days Overdue", Int64.Type}, {"Aging Bucket", type text}, {"On Time Payment", type text}, {"Invoice Month", type date}, {"Year", Int64.Type}, {"Month", type text}}, "en-US"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Changed column type",{{"Invoice Date", type date}, {"Due Date", type date}, {"Invoice Amount", type number}, {"Payment Date", type date}, {"Paid Amount", type number}, {"Outstanding Amount", type number}, {"Invoice Month", type date}})
+				in
+				  #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

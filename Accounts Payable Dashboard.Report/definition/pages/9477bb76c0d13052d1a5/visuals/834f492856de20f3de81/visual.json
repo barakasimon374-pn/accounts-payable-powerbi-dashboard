@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "834f492856de20f3de81",
+  "position": {
+    "x": 201.6454607199457,
+    "y": 257.28586521771945,
+    "z": 1000,
+    "height": 105.48335974643423,
+    "width": 196.76703645007925,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AP_Data"
+                    }
+                  },
+                  "Property": "Total Paid Amount"
+                }
+              },
+              "queryRef": "AP_Data.Total Paid Amount",
+              "nativeQueryRef": "Total Paid Amount"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "AP_Data"
+                  }
+                },
+                "Property": "Total Paid Amount"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d2a24a58270b673fea71",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AP_Data"
+              }
+            },
+            "Property": "Total Paid Amount"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+table 'Aging Sort'
+	lineageTag: c4430bd1-5111-4566-8429-a819f1e551a0
+
+	column 'Aging bucket'
+		dataType: string
+		lineageTag: c5ec97b4-78f4-463b-8127-4583020ea3d4
+		summarizeBy: none
+		sourceColumn: Aging bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Order'
+		dataType: string
+		lineageTag: a73ce99c-98f0-4b46-9bfe-8d69a82adeba
+		summarizeBy: none
+		sourceColumn: Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Aging Sort' = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WckzPzEtXcCpNzk4tUdJRCs4vKlHwL0pJLVKK1YlW8ssvUXApTQVKGIL5hrrGBgouiZXFQBEjsIixoa4ZXMgYLGRmqGsJFzIBC1kaaMMETMECAYmZKUCOmVJsLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t, Column2 = _t]),
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"Column1", "Aging bucket"}, {"Column2", "Sort Order"}})
+				in
+				  #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

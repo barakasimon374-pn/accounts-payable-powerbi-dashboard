@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "7b6e68649c1a35106c2e",
+  "position": {
+    "x": 577.55127914874367,
+    "y": 257.28586521771945,
+    "z": 3000,
+    "height": 105.48335974643423,
+    "width": 181.55309033280506,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AP_Data"
+                    }
+                  },
+                  "Property": "Total Overdue"
+                }
+              },
+              "queryRef": "AP_Data.Total Overdue",
+              "nativeQueryRef": "Total Overdue"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "AP_Data"
+                  }
+                },
+                "Property": "Total Overdue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8bbe393176b2462f93a2",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AP_Data"
+              }
+            },
+            "Property": "Total Overdue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
